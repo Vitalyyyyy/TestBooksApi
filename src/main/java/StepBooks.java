@@ -11,17 +11,10 @@ public class StepBooks extends BooksConstant {
     private static final String BOOKS_ID = "/api/books/{id}";
 
 
+
+
     @Step("add new book")
     public ValidatableResponse postBook(Books books) {
-        return given()
-                .spec(getSpec())
-                .body(books)
-                .when()
-                .post(BOOKS)
-                .then();
-    }
-    @Step("Add book without name field ")
-    public ValidatableResponse postBookWithoutNameField(Books books) {
         return given()
                 .spec(getSpec())
                 .body(books)
@@ -59,7 +52,7 @@ public class StepBooks extends BooksConstant {
 
     }
     @Step("Update book epmty name and nothing")
-    public ValidatableResponse putNegativeBook(String id) {
+    public ValidatableResponse putNegativeBookOnlyEmptyName(String id) {
         return given()
                 .spec(getSpec())
                 .body(BooksGenerator.getBookEmptyName())

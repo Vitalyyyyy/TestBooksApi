@@ -19,7 +19,7 @@ public class BooksAsserts {
     public void checkStatusAndBodyBookAtId(ValidatableResponse response) {
         response.assertThat().log().all().statusCode(200).body("book.id", is(notNullValue()));
     }
-    public void checkUpdateBookNegative(ValidatableResponse response) {
+    public void checkUpdateBookNegativeWithoutName(ValidatableResponse response) {
         response.assertThat().log().all().statusCode(400).body("error", equalTo("Author is required"));
     }
     public void checkAddBookWhithoutNameF(ValidatableResponse response) {

@@ -11,6 +11,7 @@ public class BooksPositiveTest {
     private Books books;
     private Books books2;
 
+
     private String id;
 
     @Before
@@ -18,7 +19,7 @@ public class BooksPositiveTest {
         step = new StepBooks();
         check = new BooksAsserts();
         books = BooksGenerator.getBookOnlyName();
-        books2 = BooksGenerator.getBookThereIsNotName();
+        books2 = BooksGenerator.getBookfullField();
     }
 
     @After
@@ -48,7 +49,7 @@ public class BooksPositiveTest {
 
     @Test // фулл
     public void updateBookPositiveTest() {
-        ValidatableResponse response = step.postBook(books);
+        ValidatableResponse response = step.postBook(books2);
         id = response.extract().path("book.id").toString();
         ValidatableResponse response2 = step.putBook(id);
         check.checkStatusAndBodyBookAtId(response2);
