@@ -2,8 +2,7 @@ import io.restassured.response.ValidatableResponse;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import io.qameta.allure.Step;
-import io.qameta.allure.junit4.DisplayName;
+
 
 public class BooksPositiveTest {
     private StepBooks step;
@@ -24,12 +23,10 @@ public class BooksPositiveTest {
 
     @After
     public void cleanUP() {
-        if (id == null) {
-            System.out.println("Негативные запросы не прошли валидацию, нужно проверить базу");
-        }
         step.deleteBook(id);
     }
 
+    //Добавления книги только с name
     @Test
     public void addBookOnlyNameField() {
         ValidatableResponse response = step.postBook(books);
@@ -38,16 +35,18 @@ public class BooksPositiveTest {
 
     }
 
+    //Получение добавленной книгм по id
     @Test
     public void checkIdBook() {
         ValidatableResponse response = step.postBook(books);
         id = response.extract().path("book.id").toString();
         check.checkAddBookPositive(response);
         ValidatableResponse response2 = step.getBook(id);
-        check.checkStatusAndBodyBookAtId(response2);
+        check.checkStatusAndBodyBookAtId(response2); //можно реализовать проверку на конкретный id непосредственно в методе
     }
 
-    @Test // фулл
+    //Изменение созданной книги
+    @Test
     public void updateBookPositiveTest() {
         ValidatableResponse response = step.postBook(books2);
         id = response.extract().path("book.id").toString();

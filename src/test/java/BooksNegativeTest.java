@@ -22,12 +22,14 @@ public class BooksNegativeTest {
 
     }
 
+    //Проверка добавления книги без поля NAME
     @Test
     public void addBookWithoutNameField() {
         ValidatableResponse response = step.postBook(books2);
         check.checkAddBookWhithoutNameF(response);
     }
-//----------------------------------------------------------
+
+    //Проверка добавления дубликата книги
     @Test
     public void addDublicateBook() {
         step.postBook(books);
@@ -35,7 +37,8 @@ public class BooksNegativeTest {
         check.checkAddBookNegative(response2);
     }
 
-//----------------------------
+
+    //Проверка изменения книги только с "name":""
     @Test // только пустой name
     public void updateBookOnlyNameField() {
         ValidatableResponse response = step.postBook(books);
